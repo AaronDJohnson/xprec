@@ -13,4 +13,5 @@ archs = ["x86_64", "universal2", "arm64"]
 
 # On an Linux Intel runner with qemu installed, build Intel and ARM wheels
 [tool.cibuildwheel.linux]
-archs = ["x86_64", "aarch64"]
+#archs = ["x86_64", "aarch64"]
+archs = ["aarch64"]
