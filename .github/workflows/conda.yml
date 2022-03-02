@@ -1,18 +1,23 @@
 name: Build and upload conda packages
 
 # Triggered a new tag starting with "v" is pushed
+#on:
+#  push:
+#    tags:
+#      - 'v*'
+
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      debug
 
 jobs:
   build:
     runs-on: ${{ matrix .os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        #os: [windows-latest]
+        #os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [windows-2019]
         #os: [macOS-latest]
 
     steps:
