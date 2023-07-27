@@ -154,9 +154,13 @@ static PyObject* PyDDouble_Int(PyObject* self)
         ddouble r, x, y;                                                \
         if (PyArray_Check(_y))                                          \
             return PyArray_Type.tp_as_number->tp_inner_op(_x, _y);      \
+                                                                        \
         if (PyDDouble_Cast(_x, &x) && PyDDouble_Cast(_y, &y)) {         \
             r = inner(x, y);                                            \
             return PyDDouble_Wrap(r);                                   \
+        } else if (_y->ob_type->tp_as_number && _y->ob_type->tp_as_number->tp_inner_op) { \
+            PyErr_Clear();                                              \
+            return _y->ob_type->tp_as_number->tp_inner_op(_x, _y);      \
         }                                                               \
         return NULL;                                                    \
     }
